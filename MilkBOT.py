@@ -31,6 +31,6 @@ async def equação(ctx, a: int, b: int, c: int):
     #embed.send(embed=embed)
     await ctx.send("Equação do segundo grau")
     await ctx.reply(f"Equação do segundo grau {os.linesep}O valores é a= {a} b= {b} c= {c} {os.linesep}O valor de delta é: {delta} {os.linesep}O valor da raiz do delta é:{raiz} {os.linesep}O valor de x1: {x1} {os.linesep}O valor de x2: {x2}")
-    
+    #coisa
     
 client.run(discord_token)
