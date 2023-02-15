@@ -25,12 +25,13 @@ async def equação(ctx, a: int, b: int, c: int):
     raiz = sqrt (delta)
     x1 = (-b + raiz) / (2 * a)
     x2 = (-b -raiz) / (2 * a)
-    #embed = discord.Embed(title="Equação do segundo grau :",
-    #description=b**2 - 4*a*c,color=0x9208ea)
-    #embed.set_footer(text="Criado por Dimitri")
-    #embed.send(embed=embed)
-    await ctx.send("Equação do segundo grau")
-    await ctx.reply(f"Equação do segundo grau {os.linesep}O valores é a= {a} b= {b} c= {c} {os.linesep}O valor de delta é: {delta} {os.linesep}O valor da raiz do delta é:{raiz} {os.linesep}O valor de x1: {x1} {os.linesep}O valor de x2: {x2}")
-    #coisa
+    embed = discord.Embed(title="Equação do segundo grau:",
+    description=f"O valor de a: {a} b: {b} c: {c} ",color=0x9208ea)
+    embed.set_footer(text="Criado por Dimitri")
+    embed.add_field(name="O valor de delta é:", value=f"{delta}", inline=False)
+    embed.add_field(name="O valor da raiz de delta é:", value=f"{raiz}",inline=False)
+    embed.add_field(name="O valor de x1:", value=f"{x1}",inline=False)
+    embed.add_field(name="O valor de x2:", value=f"{x2}",inline=False)
+    await ctx.send(embed = embed)
     
 client.run(discord_token)
