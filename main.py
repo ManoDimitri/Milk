@@ -3,6 +3,7 @@ from discord import app_commands
 from math import sqrt
 from dotenv import load_dotenv
 import os
+from typing import Union
 
 discord_token = os.getenv('TOKEN')
 
@@ -42,11 +43,15 @@ async def equação(interaction, a: int, b: int, c: int):
         embed.add_field(name="O valor de x2:", value=f"{x2}",inline=False)
         await interaction.response.send_message(embed = embed)
 
-"""@tree.command(name = "calcular", description = "Calculo basicos", guild=discord.Object(id=874833976085344307)) #Calculos de matematica basica
-async def calcular(ctx, *valor):
-    valor = " ".join(valor)
-    resposta = eval(valor)
-    await ctx.send(f"A resposta é: {resposta}")"""
+@tree.command(name="calcular", description="Cálculos básicos", guild=discord.Object(id=874833976085344307))
+async def calcular(interaction, valor: str):
+    try:
+        resposta = eval(valor)
+    except:
+        await interaction.response.send_message("Desculpe, a expressão inserida é inválida.")
+        return
+    await interaction.response.send_message(f"A resposta é: {resposta}")
+
 
         
 client.run(discord_token)
