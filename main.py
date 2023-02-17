@@ -6,7 +6,6 @@ import os
 
 discord_token = os.getenv('TOKEN')
 
-#client = commands.Bot(command_prefix= "$", help_command=None, intents=discord.Intents.all())
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
@@ -29,7 +28,7 @@ async def equação(interaction, a: int, b: int, c: int):
     if a == 0:
         await interaction.response.send_message("Se a = 0, não é uma equação do segundo grau. Execute o comando novamente em que o valor de A seja diferente de 0.")
     elif delta < 0:
-         await interaction.response.send_message(f"O valor de delta é menor que 0, a equação não apresentará raízes. Valor de delta: {delta}")
+        await interaction.response.send_message(f"O valor de delta é menor que 0, a equação não apresentará raízes. Valor de delta: {delta}")
     else:
         raiz = sqrt (delta)
         x1 = (-b + raiz) / (2 * a)
