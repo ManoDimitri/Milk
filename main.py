@@ -55,15 +55,4 @@ async def calcular(interaction, valor: str):
         return
     await interaction.response.send_message(f"A resposta é: {resposta}")
 
-tree.command(name= "play", description="da play na musica", guild=discord.Object(id=874833976085344307))
-AUDIO_FILE = "wandinha.mp3"
-CHANNEL = "944227244346343456"
-async def on_message(message):
-    if message.content == '!play':
-        channel = discord.utils.get(message.guild.channels, name=CHANNEL)
-        voice = await channel.connect()
-        audio = AudioSegment.from_file(AUDIO_FILE, format='mp3')
-        play(audio)
-        await voice.disconnect()
-        
 client.run(discord_token)
