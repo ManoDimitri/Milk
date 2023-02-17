@@ -14,12 +14,12 @@ async def on_ready():
 
     await client.change_presence(status= discord.Status.online,)
 
-@client.command()
+@client.command() #Teste
 async def teste(ctx):
 
     await ctx.reply(f"Salve, eu to online {ctx.author}")
 
-@client.command()
+@client.command() #Equação do segundo Grau
 async def equação(ctx, a: int, b: int, c: int):
     delta = b**2 - 4*a*c
     if a == 0:
@@ -38,5 +38,12 @@ async def equação(ctx, a: int, b: int, c: int):
         embed.add_field(name="O valor de x1:", value=f"{x1}",inline=False)
         embed.add_field(name="O valor de x2:", value=f"{x2}",inline=False)
         await ctx.send(embed = embed)
+
+@client.command() #Calculos de matematica basica
+async def calcular(ctx, *valor):
+    valor = " ".join(valor)
+    resposta = eval(valor)
+    await ctx.send(f"A resposta é: {resposta}")
+
         
 client.run(discord_token)
