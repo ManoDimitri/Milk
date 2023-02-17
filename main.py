@@ -1,31 +1,35 @@
 import discord
-from discord.ext import commands
+from discord import app_commands
 from math import sqrt
 from dotenv import load_dotenv
 import os
 
 discord_token = os.getenv('TOKEN')
 
-client = commands.Bot(command_prefix= "$", help_command=None, intents=discord.Intents.all())
+#client = commands.Bot(command_prefix= "$", help_command=None, intents=discord.Intents.all())
+intents = discord.Intents.default()
+client = discord.Client(intents=intents)
+tree = app_commands.CommandTree(client)
 
 @client.event
 async def on_ready():
+    await tree.sync(guild=discord.Object(id=874833976085344307))
     print(f"Eu entrei como {client.user.name}")
 
     await client.change_presence(status= discord.Status.online,)
 
-@client.slash_command(name="teste", guild_ids=[874833976085344307]) #Teste
-async def teste(ctx):
+@tree.command(name = "teste", description = "Testando o comando", guild=discord.Object(id=874833976085344307)) #Teste
+async def teste(interaction):
 
-    await ctx.reply(f"Salve, eu to online {ctx.author}")
+    await interaction.response.send_message("Salve, eu to online")
 
-@client.command() #Equação do segundo Grau
-async def equação(ctx, a: int, b: int, c: int):
+@tree.command(name = "equação", description = "Calcular equação do segundo grau", guild=discord.Object(id=874833976085344307)) #Equação do segundo Grau
+async def equação(interaction, a: int, b: int, c: int):
     delta = b**2 - 4*a*c
     if a == 0:
-        await ctx.reply("Se a = 0, não é uma equação do segundo grau. Execute o comando novamente em que o valor de A seja diferente de 0.")
+        await interaction.response.send_message("Se a = 0, não é uma equação do segundo grau. Execute o comando novamente em que o valor de A seja diferente de 0.")
     elif delta < 0:
-        await ctx.reply(f"O valor de delta é menor que 0, a equação não apresentará raízes. Valor de delta: {delta}")
+         await interaction.response.send_message(f"O valor de delta é menor que 0, a equação não apresentará raízes. Valor de delta: {delta}")
     else:
         raiz = sqrt (delta)
         x1 = (-b + raiz) / (2 * a)
@@ -37,13 +41,13 @@ async def equação(ctx, a: int, b: int, c: int):
         embed.add_field(name="O valor da raiz de delta é:", value=f"{raiz}",inline=False)
         embed.add_field(name="O valor de x1:", value=f"{x1}",inline=False)
         embed.add_field(name="O valor de x2:", value=f"{x2}",inline=False)
-        await ctx.send(embed = embed)
+        await interaction.response.send_message(embed = embed)
 
-@client.command() #Calculos de matematica basica
+"""@tree.command(name = "calcular", description = "Calculo basicos", guild=discord.Object(id=874833976085344307)) #Calculos de matematica basica
 async def calcular(ctx, *valor):
     valor = " ".join(valor)
     resposta = eval(valor)
-    await ctx.send(f"A resposta é: {resposta}")
+    await ctx.send(f"A resposta é: {resposta}")"""
 
         
 client.run(discord_token)
