@@ -14,7 +14,7 @@ async def on_ready():
 
     await client.change_presence(status= discord.Status.online,)
 
-@client.command() #Teste
+@client.slash_command(name="teste", guild_ids=[874833976085344307]) #Teste
 async def teste(ctx):
 
     await ctx.reply(f"Salve, eu to online {ctx.author}")
