@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 from math import sqrt
 import os
+from dotenv import load_dotenv
 from cpf_generator import CPF
 
 discord_token = os.getenv('TOKEN')
