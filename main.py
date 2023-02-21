@@ -1,12 +1,8 @@
 import discord
 from discord import app_commands
 from math import sqrt
-from dotenv import load_dotenv
 import os
-from typing import Union
-from pydub import AudioSegment
-from pydub.playback import play
-
+from cpf_generator import CPF
 
 discord_token = os.getenv('TOKEN')
 
@@ -54,5 +50,10 @@ async def calcular(interaction, valor: str):
         await interaction.response.send_message("Desculpe, a expressão inserida é inválida.")
         return
     await interaction.response.send_message(f"A resposta é: {resposta}")
+
+@tree.command(name="geradorcpf", description="Vai gerar um CPF", guild=discord.Object(id=874833976085344307))
+async def geradorcpf(interaction):
+    cpf = CPF.generate()
+    await interaction.response.send_message(f"{cpf}")
 
 client.run(discord_token)
