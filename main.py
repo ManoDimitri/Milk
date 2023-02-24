@@ -56,10 +56,10 @@ async def calcular(interaction, valor: str):
 async def geradorcpf(interaction):
     cpf = CPF.generate()
     formatedcpf = CPF.format(cpf)
-    await interaction.response.send_message(f"{formatedcpf}")
+    await interaction.response.send_message(f"CPF: {formatedcpf}")
 
 @tree.command(name="validadorcpf", description="Valida o CPF informado, informa o cpf sem os . e -", guild=discord.Object(id=874833976085344307))
-async def validaorcpf(interaction, cpf: int):
+async def validaorcpf(interaction, cpf: str):
     fcpf = CPF.format(cpf)
     validadorcpf = CPF.validate(fcpf)
     if validadorcpf == True:
