@@ -7,7 +7,7 @@ from cpf_generator import CPF
 
 load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
-guild_id = os.getenv('DISCORD_GUILD')
+guild_id = '874833976085344307'
 
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
