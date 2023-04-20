@@ -7,9 +7,12 @@ from slash import tree, client, intents
 load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
 
+server_ids = []
+
 @client.event
 async def on_ready():
-    print("O bot está online.")
+    global server_ids  
+    server_ids = [guild.id for guild in client.guilds]
     
 
 client.run(discord_token)
