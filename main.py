@@ -7,25 +7,34 @@ from cpf_generator import CPF
 
 load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
-guild_id = '874833976085344307'
+
 
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
+GUILD_ID = None
 
 @client.event
 async def on_ready():
-    await tree.sync(guild=discord.Object(id=guild_id))
-    print(f"Eu entrei como {client.user.name}")
+    global GUILD_ID
+    for guild in client.guilds:
+        if guild.name == "Nome do servidor":
+            GUILD_ID = guild.id
+            break
+    if GUILD_ID is None:
+        print("Não foi possivel encontrar o ID do servidor")
+    else:
+        print(f"O ID do servidor é:{GUILD_ID}")
+    
 
     await client.change_presence(status= discord.Status.online,)
 
-@tree.command(name = "teste", description = "Testando o comando", guild=discord.Object(id=guild_id))
+@tree.command(name = "teste", description = "Testando o comando", guild=discord.Object(id=GUILD_ID))
 async def teste(interaction):
 
     await interaction.response.send_message("Salve, eu to online")
 
-@tree.command(name = "equação", description = "Calcular equação do segundo grau", guild=discord.Object(id=guild_id))
+@tree.command(name = "equação", description = "Calcular equação do segundo grau", guild=discord.Object(id=GUILD_ID))
 async def equação(interaction, a: int, b: int, c: int):
     delta = b**2 - 4*a*c
     if a == 0:
@@ -45,7 +54,7 @@ async def equação(interaction, a: int, b: int, c: int):
         embed.add_field(name="O valor de x2:", value="{:.2f}".format(x2),inline=False)
         await interaction.response.send_message(embed = embed)
 
-@tree.command(name="calcular", description="Cálculos básicos", guild=discord.Object(id=guild_id))
+@tree.command(name="calcular", description="Cálculos básicos", guild=discord.Object(id=GUILD_ID))
 async def calcular(interaction, valor: str):
     try:
         resposta = eval(valor)
@@ -54,13 +63,13 @@ async def calcular(interaction, valor: str):
         return
     await interaction.response.send_message(f"A resposta é: {resposta}")
 
-@tree.command(name="geradorcpf", description="Vai gerar um CPF", guild=discord.Object(id=guild_id))
+@tree.command(name="geradorcpf", description="Vai gerar um CPF", guild=discord.Object(id=GUILD_ID))
 async def geradorcpf(interaction):
     cpf = CPF.generate()
     formatedcpf = CPF.format(cpf)
     await interaction.response.send_message(f"CPF: {formatedcpf}")
 
-@tree.command(name="validadorcpf", description="Valida o CPF informado, informa o cpf sem os . e -", guild=discord.Object(id=guild_id))
+@tree.command(name="validadorcpf", description="Valida o CPF informado, informa o cpf sem os . e -", guild=discord.Object(id=GUILD_ID))
 async def validadorcpf(interaction, cpf: str):
     fcpf = CPF.format(cpf)
     validadorcpf = CPF.validate(fcpf)
@@ -69,7 +78,7 @@ async def validadorcpf(interaction, cpf: str):
     elif validadorcpf == False:
         await interaction.response.send_message(f"O CPF: {fcpf} é falso!")
 
-@tree.command(name="calculadordesconto", description="Calcular o desconto de um produto", guild=discord.Object(guild_id))
+@tree.command(name="calculadordesconto", description="Calcular o desconto de um produto", guild=discord.Object(id=GUILD_ID))
 async def calculardesconto(interaction, desconto: float, preço: float):
     des = (desconto/100)
     valordescontado = (preço * des)
