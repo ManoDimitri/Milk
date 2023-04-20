@@ -4,6 +4,7 @@ from cpf_generator import CPF
 
 @tree.command(name="validadorcpf", description="Valida o CPF informado, informa o cpf sem os . e -")
 async def validadorcpf(interaction, cpf: str):
+    server_id = interaction.guild_id
     fcpf = CPF.format(cpf)
     validadorcpf = CPF.validate(fcpf)
     if validadorcpf == True:

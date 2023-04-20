@@ -4,6 +4,7 @@ from math import sqrt
 
 @tree.command(name = "equação", description = "Calcular equação do segundo grau")
 async def equação(interaction, a: int, b: int, c: int):
+    server_id = interaction.guild_id
     delta = b**2 - 4*a*c
     if a == 0:
         await interaction.response.send_message("Se a = 0, não é uma equação do segundo grau. Execute o comando novamente em que o valor de A seja diferente de 0.")

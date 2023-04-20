@@ -3,6 +3,7 @@ from slash import *
 
 @tree.command(name="calcular", description="Cálculos básicos")
 async def calcular(interaction, valor: str):
+    server_id = interaction.guild_id
     try:
         resposta = eval(valor)
     except:
