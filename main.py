@@ -2,7 +2,7 @@ import discord
 import os
 from dotenv import load_dotenv
 from commands import teste, calculadordesconto, equacao, geradorcpf, validadorcpf, calcular
-from slash import intents, client, tree
+from slash import tree, client, intents
 
 
 load_dotenv()
