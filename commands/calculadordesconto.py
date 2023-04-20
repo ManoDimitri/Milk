@@ -3,7 +3,6 @@ from slash import *
 
 @tree.command(name="calculadordesconto", description="Calcular o desconto de um produto")
 async def calculardesconto(interaction, desconto: float, preço: float):
-    server_id = interaction.guild_id
     des = (desconto/100)
     valordescontado = (preço * des)
     valorfinal = (preço - valordescontado)
