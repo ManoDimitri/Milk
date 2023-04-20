@@ -7,12 +7,10 @@ from slash import tree, client, intents
 load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
 
-server_ids = []
 
 @client.event
 async def on_ready():
-    global server_ids  
-    server_ids = [guild.id for guild in client.guilds]
+   print("Estou conectado!")
 
 @tree.command()
 async def meucomando(ctx):
