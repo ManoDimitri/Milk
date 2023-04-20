@@ -1,7 +1,7 @@
 import discord
 from slash import *
 
-@tree.command(name="calculadordesconto", description="Calcular o desconto de um produto",guild=discord.Object(id=714557909878571119))
+@tree.command(name="calculadordesconto", description="Calcular o desconto de um produto")
 async def calculardesconto(interaction, desconto: float, preço: float):
     des = (desconto/100)
     valordescontado = (preço * des)
