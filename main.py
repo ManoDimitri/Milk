@@ -8,12 +8,12 @@ load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
 
 @client.event
-async def on_ready():
-    guild = client.guilds[0]
-    await tree.sync(guild=guild)
-    print(f"Eu entrei como {client.user.name} na guild {guild.name}")
-
-    await client.change_presence(status= discord.Status.online,)
+async def on_ready(interaction):
+    server_id = interaction.guild.id
+    print(f'Logged in as {client.user.name} (ID: {client.user.id})')
+    print('------')
+    activity = discord.Activity(name='Testando bot', type=discord.ActivityType.playing)
+    await client.change_presence(activity=activity)
     
 
 client.run(discord_token)
