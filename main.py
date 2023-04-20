@@ -12,7 +12,7 @@ discord_token = os.getenv('DISCORD_TOKEN')
 async def on_ready():
    print("Estou conectado!")
 
-@tree.command()
+@tree.command(name="ID", description="Pegar o ID")
 async def meucomando(ctx):
     guild_id = ctx.guild.id
     print(f"O ID do servidor é {guild_id}")
