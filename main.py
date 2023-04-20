@@ -11,11 +11,6 @@ discord_token = os.getenv('DISCORD_TOKEN')
 @client.event
 async def on_ready():
    print("Estou conectado!")
-
-@tree.command(name="id", description="Pegar o ID")
-async def id(interaction):
-    guild_id = interaction.guild.id
-    print(f"O ID do servidor é {guild_id}")
     
 
 client.run(discord_token)

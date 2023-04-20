@@ -1,7 +1,7 @@
 import discord
 from slash import *
 
-@tree.command(name="calcular", description="Cálculos básicos")
+@tree.command(name="calcular", description="Cálculos básicos",guild=discord.Object(id=714557909878571119))
 async def calcular(interaction, valor: str):
     try:
         resposta = eval(valor)

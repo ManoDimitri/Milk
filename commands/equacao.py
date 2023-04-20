@@ -2,7 +2,7 @@ import discord
 from slash import *
 from math import sqrt
 
-@tree.command(name = "equação", description = "Calcular equação do segundo grau")
+@tree.command(name = "equação", description = "Calcular equação do segundo grau",guild=discord.Object(id=714557909878571119))
 async def equação(interaction, a: int, b: int, c: int):
     delta = b**2 - 4*a*c
     if a == 0:
