@@ -6,7 +6,7 @@ from slash import tree, client, intents
 
 load_dotenv()
 discord_token = os.getenv('DISCORD_TOKEN')
-guilds = client.guilds
+
 
 @client.event
 async def on_ready():
